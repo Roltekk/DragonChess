@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="dragonchess-android" default="main" basedir=".">
+<project name="dragonchess-android" default="help" basedir=".">
 
-<!-- reference from "LibDGX without Eclipse, for android" -->
-<!--    <property name="root.dir" value=".." />
-    <property name="main.project.dir" value="${root.dir}/main" />
--->
-    <!-- The local.properties file is created and updated by the 'android' tool.
-         It contains the path to the SDK. It should *NOT* be checked into
-         Version Control Systems. -->
-<!--    <property file="local.properties" />
--->
+<!-- PROPERTIES ************************************************************ -->
+  <property name="verbose" value="no" />
+  <property name="ant.build.javac.source" value="1.6"/>
+  <property name="ant.build.javac.target" value="1.6"/>
+
+  <!-- directories ******************************************************* -->
+  <property name="root.dir" value=".." />
+
+  <!-- core project -->
+  <property name="core.dir" value="${root.dir}/dragonchess-core" />
+
+  <!-- files ************************************************************* -->
+  <property file="local.properties" />
+
     <!-- The ant.properties file can be created by you. It is only edited by the
          'android' tool to add properties to it.
          This is the place to change some Ant specific build properties.
@@ -28,19 +33,18 @@
 
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems.
-
          -->
-<!--    <property file="ant.properties" />
--->
+  <property file="ant.properties" />
+
     <!-- if sdk.dir was not set from one of the property file, then
          get it from the ANDROID_HOME env var.
          This must be done before we load project.properties since
          the proguard config can use sdk.dir -->
-<!--    <property environment="env" />
+  <property environment="env" />
     <condition property="sdk.dir" value="${env.ANDROID_HOME}">
-        <isset property="env.ANDROID_HOME" />
+      <isset property="env.ANDROID_HOME" />
     </condition>
--->
+
     <!-- The project.properties file is created and updated by the 'android'
          tool, as well as ADT.
 
@@ -50,14 +54,13 @@
 
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
-<!--    <loadproperties srcFile="project.properties" />
--->
+  <loadproperties srcFile="project.properties" />
+
     <!-- quick check on sdk.dir -->
-<!--    <fail
-            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable."
-            unless="sdk.dir"
-    />
--->
+  <fail
+      message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable."
+      unless="sdk.dir" />
+    
     <!--
         Import per project custom build rules if present at the root of the project.
         This is the place to put custom intermediary targets such as:
@@ -70,8 +73,8 @@
             -post-build
             -pre-clean
     -->
-<!--    <import file="custom_rules.xml" optional="true" />
--->
+  <import file="custom_rules.xml" optional="true" />
+
     <!-- Import the actual build file.
 
          To customize existing targets, there are two options:
@@ -91,12 +94,14 @@
          in order to avoid having your file be overridden by tools such as "android update project"
     -->
     <!-- Compiles this project's .java files into .class files. -->
-<!--    <target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
-        <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
--->
+
+<!-- TARGETS *************************************************************** -->
+  <target name="-compile" depends="-build-setup, -pre-build, -code-gen, -pre-compile">
+    <do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
+
             <!-- If android rules are used for a test project, its classpath should include
                  tested project's location -->
-<!--            <condition property="extensible.classpath"
+            <condition property="extensible.classpath"
                     value="${tested.project.absolute.dir}/bin/classes"
                     else=".">
                 <isset property="tested.project.absolute.dir" />
@@ -117,15 +122,15 @@
                     fork="${need.javac.fork}">
                 <src path="${source.absolute.dir}" />
                 <src path="${gen.absolute.dir}" />
-                <src path="${main.project.dir}" />
+                <src path="${core.dir}" />
                 <classpath>
                     <fileset dir="${extensible.libs.classpath}" includes="*.jar" />
                 </classpath>
                 <compilerarg line="${java.compilerargs}" />
             </javac>
--->
+
             <!-- if the project is a library then we generate a jar file -->
-<!--            <if condition="${project.is.library}">
+            <if condition="${project.is.library}">
                 <then>
                     <echo>Creating library output jar file...</echo>
                     <property name="out.library.jar.file" location="${out.absolute.dir}/classes.jar" />
@@ -148,14 +153,14 @@
                     </jar>
                 </then>
             </if>
--->
+
             <!-- if the project is instrumented, intrument the classes -->
-<!--            <if condition="${build.is.instrumented}">
+            <if condition="${build.is.instrumented}">
                 <then>
                     <echo>Instrumenting classes from ${out.absolute.dir}/classes...</echo>
--->
+
                     <!-- It only instruments class files, not any external libs -->
-<!--                    <emma enabled="true">
+                   <emma enabled="true">
                         <instr verbosity="${verbosity}"
                                mode="overwrite"
                                instrpath="${out.absolute.dir}/classes"
@@ -166,11 +171,47 @@
                     </emma>
                 </then>
             </if>
+
         </do-only-if-manifest-hasCode>
     </target>
+
+  <target name="help" description="Displays detailed usage information.">
+    <echo>
+dragonchess-android
+
+<!-- reference for help lines
+DragonChess Ant Build File
+
+The Targets are: 
+
+default         compile and run.
+
+clean           Remove all class files from [bin]
+compile         Compile all classes in [bin].
+run                     Run DragonChess
+
+dist            Make distribution in [dist] (jar,zip,tgz).
 -->
+<!-- init               Initialize
+clean-build     Clean [build]
+clean-dist      Clean [dist]
+compile-build   Compile all classes in [build].
+prepare-dist    Non generated files for the distribution.  -->
+<!--
+javadoc         Build javadoc in [javadoc]
+clean-all       Clean all.
+changelog               Generate a changelog (short form: ant cl)
+help            what you're looking at now.
+-->
+
+[src]           ${src.dir}
+[dist]          ${out.dir}
+[javadoc]       ${javadoc}
+    </echo>
+  </target>
+
     <!-- version-tag: custom -->
-<!--    <import file="${sdk.dir}/tools/ant/build.xml" />
--->
+  <import file="${sdk.dir}/tools/ant/build.xml" />
+
 </project>
 

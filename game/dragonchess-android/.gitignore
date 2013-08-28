@@ -3,6 +3,15 @@
 .classpath
 .project
 
+# Android properties files
+local.properties
+
 # Android build files
 /bin
 /gen
+
+# Core project Referenced libs
+/libs/gdx.jar
+
+
+
