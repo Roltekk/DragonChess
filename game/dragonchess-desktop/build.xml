@@ -133,30 +133,16 @@
     <echo>
 dragonchess-desktop
 
-<!-- reference for ahelp lines
-DragonChess Ant Build File
-
 The Targets are: 
 
-default         compile and run.
+default         help
 
 clean           Remove all class files from [bin]
 compile         Compile all classes in [bin].
-run                     Run DragonChess
+<!-- run                     Run DragonChess -->
+dist            Make distribution in [bin] (jar)
 
-dist            Make distribution in [dist] (jar,zip,tgz).
--->
-<!-- init               Initialize
-clean-build     Clean [build]
-clean-dist      Clean [dist]
-compile-build   Compile all classes in [build].
-prepare-dist    Non generated files for the distribution.  -->
-<!--
-javadoc         Build javadoc in [javadoc]
-clean-all       Clean all.
-changelog               Generate a changelog (short form: ant cl)
 help            what you're looking at now.
--->
 
 [src]           ${src.dir}
 [dist]          ${out.dir}
