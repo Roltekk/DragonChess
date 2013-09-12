@@ -1,0 +1,6 @@
+# Eclipse IDE specific files
+.settings
+.classpath
+.project
+
+
