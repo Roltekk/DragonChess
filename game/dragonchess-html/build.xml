@@ -22,7 +22,7 @@
     <fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>
     <!-- Add any additional non-server libs (such as JUnit) -->
     <fileset dir="war/WEB-INF/lib" includes="**/*.jar"/>
-  </path>
+  </path> 
 
   <target name="libs" description="Copy libs to WEB-INF/lib">
     <mkdir dir="war/WEB-INF/lib" />
@@ -35,10 +35,20 @@
 
   <target name="javac" depends="libs" description="Compile java source to bytecode">
     <mkdir dir="war/WEB-INF/classes"/>
-    <javac srcdir="src" includes="**" encoding="utf-8"
+	<javac 
+		srcdir="src"
+		includes="**"
+		encoding="utf-8"
+		includeantruntime="false"
         destdir="war/WEB-INF/classes"
-        source="1.5" target="1.5" nowarn="true"
-        debug="true" debuglevel="lines,vars,source">
+        source="1.6"
+		target="1.6"
+		nowarn="true"
+        debug="true"
+		debuglevel="lines,vars,source"
+ 		verbose="${verbose}">
+      <src path="${core.dir}/src" />
+	  <src path="${core.dir}/libs" />
       <classpath refid="project.class.path"/>
     </javac>
     <copy todir="war/WEB-INF/classes">
@@ -79,7 +89,7 @@
       <arg value="war"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg line="${gwt.args}"/>
-      <arg value="com.roltekk.game.dragonchess_html"/>
+      <arg value="com.roltekk.game.dragonchess_html.dragonchess_html"/>
     </java>
   </target>
 

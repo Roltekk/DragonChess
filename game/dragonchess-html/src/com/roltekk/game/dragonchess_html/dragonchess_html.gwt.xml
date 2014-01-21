@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit trunk//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd">
 <module rename-to='dragonchess_html'>
- 	<inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' />
-	<!-- <inherits name='com.roltekk.game.dragonchess_core.DragonChessCore' /> -->
+  	<inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' />
+	<!-- <inherits name='DragonChessCore' /> -->
+	<inherits name="DragonChessCore" />
 	<entry-point class='com.roltekk.game.dragonchess_html.client.GwtLauncher' />
-	<!-- <set-configuration-property name="gdx.assetpath" value="../dragonchess-android/assets" /> -->
-  <!-- <source path='client'/> -->
+	<set-configuration-property name="gdx.assetpath" value="../dragonchess-android/assets" />
 </module>
