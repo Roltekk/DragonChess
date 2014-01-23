@@ -5,6 +5,9 @@
   <property name="verbose" value="yes" />
 
   <!-- Arguments to gwtc and devmode targets -->
+  <!-- <property name="gwt.args" value="-logLevel TRACE" /> -->
+  <!-- to speed up compile (doesnt work for devmode target) -->
+  <!-- <property name="gwt.args" value="-draftCompile" /> -->
   <property name="gwt.args" value="" />
 
   <!-- Configure path to GWT SDK -->
@@ -12,17 +15,47 @@
   
   <!-- directories ******************************************************* -->
   <property name="root.dir" value=".." />
-
+  
   <!-- core project -->
   <property name="core.dir" value="${root.dir}/dragonchess-core" />
+  <property name="core.src.dir" value="${core.dir}/src"/>
+  <property name="core.libs.dir" value="${core.dir}/libs"/>
+  <property name="core.libs.absolute.dir" location="${core.libs.dir}" />
+
+  <!-- html project -->
+  <property name="src.dir" value="src" />
+  <!-- <echo> ${src.dir} </echo> -->
+  <property name="src.absolute.dir" location="${src.dir}" />
+  <property name="libs.dir" value="war/WEB-INF/lib" />
+  <property name="libs.absolute.dir" location="${libs.dir}" />
+
+  <!-- core project -->
+  <!-- <property name="core.dir" value="${root.dir}/dragonchess-core" /> -->
+  
+  <!-- <classpathentry kind="src" combineaccessrules="false" path="/testLibGDXSetupUI"/> -->
 
   <path id="project.class.path">
     <pathelement location="war/WEB-INF/classes"/>
     <pathelement location="${gwt.sdk}/gwt-user.jar"/>
     <fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>
     <!-- Add any additional non-server libs (such as JUnit) -->
-    <fileset dir="war/WEB-INF/lib" includes="**/*.jar"/>
-  </path> 
+    <!-- <fileset dir="war/WEB-INF/lib" includes="**/*.jar"/> -->
+    <fileset dir="${libs.absolute.dir}">
+        <include name="**/*.jar" />
+    </fileset>
+    <fileset dir="${core.libs.absolute.dir}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+  
+<!--   <path id="javac.classpath">
+      <fileset dir="${libs.absolute.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+      <fileset dir="${core.libs.absolute.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+    </path> -->
 
   <target name="libs" description="Copy libs to WEB-INF/lib">
     <mkdir dir="war/WEB-INF/lib" />
@@ -30,25 +63,47 @@
     <copy todir="war/WEB-INF/lib" file="${gwt.sdk}/gwt-servlet-deps.jar" />
     <!-- Add any additional server libs that need to be copied -->
     <copy todir="war/WEB-INF/lib" file="${core.dir}/libs/gdx.jar" />
-    <!-- <copy todir="war/WEB-INF/lib" file="${core.dir}/libs/gdx-sources.jar" /> -->
+    <copy todir="war/WEB-INF/lib" file="${core.dir}/libs/gdx-sources.jar" />
   </target>
+  
+  <!-- From desktop ant  -->
+<!--     <target name="compile" depends="init" description="Compiles code, output goes to the build dir.">
+    <path id="javac.classpath">
+      <fileset dir="${libs.absolute.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+      <fileset dir="${core.libs.absolute.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+    </path>
+    <javac 
+        srcdir="${src.dir}" 
+        destdir="${out.classes.absolute.dir}"
+        classpathref="javac.classpath"
+        includeantruntime="false"
+        debug="on"
+        verbose="${verbose}">
+      <src path="${core.src.dir}" /> -->
+      <!-- <src path="${out.assets.dir}" /> -->
+<!--     </javac>
+  </target> -->
 
   <target name="javac" depends="libs" description="Compile java source to bytecode">
     <mkdir dir="war/WEB-INF/classes"/>
-	<javac 
-		srcdir="src"
-		includes="**"
-		encoding="utf-8"
-		includeantruntime="false"
-        destdir="war/WEB-INF/classes"
-        source="1.6"
-		target="1.6"
-		nowarn="true"
-        debug="true"
-		debuglevel="lines,vars,source"
- 		verbose="${verbose}">
-      <src path="${core.dir}/src" />
-	  <src path="${core.dir}/libs" />
+    <javac 
+      srcdir="src"
+      includes="**"
+      encoding="utf-8"
+      includeantruntime="false"
+      destdir="war/WEB-INF/classes"
+      source="1.6"
+      target="1.6"
+      nowarn="true"
+      debug="true"
+      debuglevel="lines,vars,source"
+      verbose="${verbose}">
+      <src path="${core.src.dir}" />
+<!--       <src path="${core.dir}/libs" /> -->
       <classpath refid="project.class.path"/>
     </javac>
     <copy todir="war/WEB-INF/classes">
@@ -60,6 +115,7 @@
     <java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
       <classpath>
         <pathelement location="src"/>
+        <pathelement location="${core.src.dir}"/>
         <path refid="project.class.path"/>
         <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA.jar" />
         <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar" />
@@ -70,7 +126,7 @@
       <arg value="war"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg line="${gwt.args}"/>
-      <arg value="com.roltekk.game.dragonchess_html.dragonchess_html"/>
+      <arg value="com.roltekk.game.dragonchess_html.GwtDefinition"/>
     </java>
   </target>
 
@@ -78,18 +134,19 @@
     <java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode">
       <classpath>
         <pathelement location="src"/>
+        <pathelement location="${core.src.dir}"/>
         <path refid="project.class.path"/>
         <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA.jar" />
         <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
       <jvmarg value="-Xmx256M"/>
       <arg value="-startupUrl"/>
-      <arg value="dragonchess_html.html"/>
+      <arg value="dragonchess.html"/>
       <arg line="-war"/>
       <arg value="war"/>
       <!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
       <arg line="${gwt.args}"/>
-      <arg value="com.roltekk.game.dragonchess_html.dragonchess_html"/>
+      <arg value="com.roltekk.game.dragonchess_html.GwtDefinition"/>
     </java>
   </target>
 
