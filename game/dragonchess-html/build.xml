@@ -12,7 +12,12 @@
 
   <!-- Configure path to GWT SDK -->
   <!-- <property name="gwt.sdk" location="D:/SDK/gwt-2.5.1" />  -->
-  <property name="gwt.sdk" value="${env.GWT_HOME}" />
+  <property environment="env"/>
+  <condition property="gwt.sdk" value="${env.GWT_HOME}">
+    <isset property="env.GWT_HOME"/>
+  </condition>
+
+  <!-- <property name="gwt.sdk" value="${env.GWT_HOME}" /> -->
   
   <!-- directories ******************************************************* -->
   <property name="root.dir" value=".." />
