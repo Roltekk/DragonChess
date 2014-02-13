@@ -11,14 +11,11 @@
   <property name="gwt.args" value="" />
 
   <!-- Configure path to GWT SDK -->
-  <!-- <property name="gwt.sdk" location="D:/SDK/gwt-2.5.1" />  -->
   <property environment="env"/>
   <condition property="gwt.sdk" value="${env.GWT_HOME}">
     <isset property="env.GWT_HOME"/>
   </condition>
 
-  <!-- <property name="gwt.sdk" value="${env.GWT_HOME}" /> -->
-  
   <!-- directories ******************************************************* -->
   <property name="root.dir" value=".." />
   
@@ -35,11 +32,6 @@
   <property name="libs.dir" value="war/WEB-INF/lib" />
   <property name="libs.absolute.dir" location="${libs.dir}" />
 
-  <!-- core project -->
-  <!-- <property name="core.dir" value="${root.dir}/dragonchess-core" /> -->
-  
-  <!-- <classpathentry kind="src" combineaccessrules="false" path="/testLibGDXSetupUI"/> -->
-
   <path id="project.class.path">
     <pathelement location="war/WEB-INF/classes"/>
     <pathelement location="${gwt.sdk}/gwt-user.jar"/>
@@ -54,15 +46,6 @@
     </fileset>
   </path>
   
-<!--   <path id="javac.classpath">
-      <fileset dir="${libs.absolute.dir}">
-        <include name="**/*.jar" />
-      </fileset>
-      <fileset dir="${core.libs.absolute.dir}">
-        <include name="**/*.jar" />
-      </fileset>
-    </path> -->
-
   <target name="libs" description="Copy libs to WEB-INF/lib">
     <mkdir dir="war/WEB-INF/lib" />
     <copy todir="war/WEB-INF/lib" file="${gwt.sdk}/gwt-servlet.jar" />
@@ -101,8 +84,8 @@
         <pathelement location="src"/>
         <pathelement location="${core.src.dir}"/>
         <path refid="project.class.path"/>
-        <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA.jar" />
-        <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar" />
+        <pathelement location="${gwt.sdk}/validation-api-1.0.0.GA.jar" />
+        <pathelement location="${gwt.sdk}/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
       <!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
       <jvmarg value="-Xmx256M"/>
@@ -120,8 +103,8 @@
         <pathelement location="src"/>
         <pathelement location="${core.src.dir}"/>
         <path refid="project.class.path"/>
-        <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA.jar" />
-        <pathelement location="D:/SDK/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar" />
+        <pathelement location="${gwt.sdk}/validation-api-1.0.0.GA.jar" />
+        <pathelement location="${gwt.sdk}/validation-api-1.0.0.GA-sources.jar" />
       </classpath>
       <jvmarg value="-Xmx256M"/>
       <arg value="-startupUrl"/>
