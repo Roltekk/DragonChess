@@ -195,6 +195,10 @@ Test targets suppressed because -junit argument was not specified when running w
   <target name="clean" description="Cleans this project">
     <delete dir="war/WEB-INF/classes" failonerror="false" />
     <delete dir="war/dragonchess_html" failonerror="false" />
+    <delete file="war/WEB-INF/lib/gwt-servlet.jar" failonerror="false" />
+    <delete file="war/WEB-INF/lib/gwt-servlet-deps.jar" failonerror="false" />
+    <delete file="war/WEB-INF/lib/gdx.jar" failonerror="false" />
+    <delete file="war/WEB-INF/lib/gdx-sources.jar" failonerror="false" />
   </target>
 
 </project>
