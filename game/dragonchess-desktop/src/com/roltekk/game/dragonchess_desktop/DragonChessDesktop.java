@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2014 RolTekk
+ * Application: DragonChess
+ * Description: desktop platform wrapper
+ */
+
 package com.roltekk.game.dragonchess_desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

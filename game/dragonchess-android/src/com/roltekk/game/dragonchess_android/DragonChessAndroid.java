@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2014 RolTekk
+ * Application: DragonChess
+ * Description: Android platform wrapper
+ */
+
 package com.roltekk.game.dragonchess_android;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;

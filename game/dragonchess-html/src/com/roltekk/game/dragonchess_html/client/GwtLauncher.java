@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2014 RolTekk
+ * Application: DragonChess
+ * Description: web platform wrapper
+ */
+
 package com.roltekk.game.dragonchess_html.client;
 
 import com.roltekk.game.dragonchess_core.DragonChessCore;
