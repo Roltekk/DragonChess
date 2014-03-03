@@ -22,56 +22,49 @@
   <property name="libs.absolute.dir" location="${libs.dir}" />
 
   <!-- common assets -->
-<!--  <property name="assets.dir" value="${root.dir}/android/assets"/> -->
-<!--  <property name="assets.absolute.dir" location="${assets.dir}"/> -->
+  <property name="assets.dir" value="${root.dir}/dragonchess-android/assets"/>
+  <property name="assets.absolute.dir" location="${assets.dir}"/>
 
   <!-- output -->
   <property name="out.dir" value="bin" />
   <property name="out.absolute.dir" location="${out.dir}" />
   <property name="out.classes.absolute.dir" location="${out.dir}/classes" />
-<!--  <property name="out.assets.dir" value="${out.dir}/assets" /> -->
-<!--  <property name="out.assets.absolute.dir" location="${out.assets.dir}" /> -->
-
+  <property name="out.assets.dir" value="${out.dir}/assets" />
+  <property name="out.assets.absolute.dir" location="${out.assets.dir}" />
 
 <!-- TARGETS *************************************************************** -->
   <target name="clean" description="Deletes all generated files and folders.">
     <delete dir="${out.dir}" verbose="${verbose}" />
   </target>
 
-
 <!-- reference from "LibDGX without Eclipse, for desktop" -->
-
   <target name="init">
     <mkdir dir="${out.dir}" />
-    <!-- <mkdir dir="${out.assets.dir}" /> -->
+    <mkdir dir="${out.assets.dir}" />
     <mkdir dir="${out.classes.absolute.dir}" />
   </target>
 
-<!--    <target name="pack-textures" depends="init-build">
--->
-        <!-- pack textures -->
-<!--        <java 
+<!--   <target name="pack-textures" depends="init">
+    pack textures
+        <java 
             classname="com.badlogic.gdx.tools.imagepacker.TexturePacker2" 
             classpath="${libgdx.absolute.dir}/gdx.jar:${libgdx.absolute.dir}/extensions/gdx-tools.jar">
             <arg value="${images.absolute.dir}" />
             <arg value="${assets.absolute.dir}/textures" />
             <arg value="images-packed" />
         </java>
-    </target>
+    </target> -->
 
-    <target name="copy-assets" depends="pack-textures">
--->
-        <!-- copy assets from android project -->
-<!--        <copy includeemptydirs="false" todir="${out.assets.dir}">
-            <fileset dir="${assets.dir}">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
+  <target name="copy-assets">
+    <!-- copy assets from android project -->
+    <copy includeemptydirs="false" todir="${out.assets.dir}">
+      <fileset dir="${assets.dir}">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+  </target>
 
-    <target name="compile" depends="init-build,pack-textures,copy-assets">
--->
-  <target name="compile" depends="init" description="Compiles code, output goes to the build dir.">
+  <target name="compile" depends="init, copy-assets" description="Compiles code, output goes to the build dir.">
     <path id="javac.classpath">
       <fileset dir="${libs.absolute.dir}">
         <include name="**/*.jar" />
@@ -88,7 +81,7 @@
         debug="on"
         verbose="${verbose}">
       <src path="${core.src.dir}" />
-      <!-- <src path="${out.assets.dir}" /> -->
+      <src path="${out.assets.dir}" />
     </javac>
   </target>
 
@@ -98,7 +91,7 @@
         basedir="${out.classes.absolute.dir}">
       <zipgroupfileset dir="${libs.absolute.dir}" includes="*.jar"/>
       <zipgroupfileset dir="${core.libs.absolute.dir}" includes="*.jar"/>
-      <!-- <fileset dir="${out.assets.dir}" /> -->
+      <fileset dir="${out.assets.dir}" />
       <manifest>
         <attribute name="Main-Class" value="com.roltekk.game.dragonchess_desktop.DragonChessDesktop"/>
       </manifest>

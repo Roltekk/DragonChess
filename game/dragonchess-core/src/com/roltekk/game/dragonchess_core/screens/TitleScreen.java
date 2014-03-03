@@ -9,6 +9,7 @@ package com.roltekk.game.dragonchess_core.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.roltekk.game.dragonchess_core.DragonChessCore;
 import com.roltekk.game.dragonchess_core.enums.Screens;
@@ -17,6 +18,7 @@ public class TitleScreen implements Screen, InputProcessor {
   private static final String TAG = "TitleScreen";
   private static TitleScreen mInstance = null;
   private DragonChessCore mDCC;
+  private Color mBGColor = Color.RED;
   
   // unctor
   protected TitleScreen() {}
@@ -34,8 +36,8 @@ public class TitleScreen implements Screen, InputProcessor {
   // Screen overrides /////////////////////////////////////////////////////////
   @Override
   public void render(float delta) {
-    // clear screen (black)
-    Gdx.gl.glClearColor(1.0f, 0.0f, 0.0f, 1);
+    // clear screen
+    Gdx.gl.glClearColor(mBGColor.r, mBGColor.b, mBGColor.g, mBGColor.a);
     Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
     // TODO : draw title screen here
     //...
@@ -48,26 +50,32 @@ public class TitleScreen implements Screen, InputProcessor {
 
   @Override
   public void resize(int width, int height) {
+    Gdx.app.debug(TAG, "resize");
   }
 
   @Override
   public void show() {
+    Gdx.app.debug(TAG, "show");
   }
 
   @Override
   public void hide() {
+    Gdx.app.debug(TAG, "hide");
   }
 
   @Override
   public void pause() {
+    Gdx.app.debug(TAG, "pause");
   }
 
   @Override
   public void resume() {
+    Gdx.app.debug(TAG, "resume");
   }
 
   @Override
   public void dispose() {
+    Gdx.app.debug(TAG, "dispose");
   }
 
   // InputProcessor overrides /////////////////////////////////////////////////
