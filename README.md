@@ -31,5 +31,5 @@ Goals
 - The game will be developed rapidly using the desktop version to keep the debugging cycle as fast as possible.
 - The intended platform will be +7 inch Android tablet, so sizing will adjusted for user ease of touch control.
 - The Android version of the game will be published on Google Play for free and without ads.
-- The Desktop version will be a publically available download (location TBD), with a link originating from http://roltekk.com.
+- The Desktop version will be a publicly available download as an executable jar (location TBD), with a link originating from http://roltekk.com.
 - The Web version will be playable at http://roltekk.com.
