@@ -9,9 +9,11 @@ package com.roltekk.game.dragonchess_core;
 public class Credits {
   // programming
   // Ryan Paul Wilson (rolzad73@gmail.com)
+  // License TBD depending what is required for new code using existing dragonchess code
   
   // Extra code
   // Dragonchess for PC (sourceforge.net/projects/dragonchess)
+  // GNU General Public License version 2.0 (GPLv2)
 
   // music
   // "Decline" Kevin MacLeod (incompetech.com)
