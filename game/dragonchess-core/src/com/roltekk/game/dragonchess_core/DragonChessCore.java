@@ -30,7 +30,7 @@ public class DragonChessCore extends Game {
     // try to start music
     mBGMusic = Gdx.audio.newMusic(Gdx.files.internal("music/Decline.mp3"));
     mBGMusic.setLooping(true);
-    mBGMusic.play();tt
+    mBGMusic.play();
     
 //    Global.checkGLVersion();
     // results:
