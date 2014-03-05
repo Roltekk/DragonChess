@@ -8,6 +8,7 @@ package com.roltekk.game.dragonchess_core;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.roltekk.game.dragonchess_core.debug.Debug;
 import com.roltekk.game.dragonchess_core.enums.Screens;
@@ -18,12 +19,18 @@ import com.roltekk.game.dragonchess_core.screens.TitleScreen;
 
 public class DragonChessCore extends Game {
   private static final String TAG = "DragonChessCore";
+  private Music               mBGMusic;
 
   // ApplicationListener overrides ////////////////////////////////////////////
   @Override
   public void create() {
     Gdx.app.setLogLevel(Debug.LOG_LVL);
     Gdx.app.debug(TAG, "create game");
+    
+    // try to start music
+    mBGMusic = Gdx.audio.newMusic(Gdx.files.internal("music/Decline.mp3"));
+    mBGMusic.setLooping(true);
+    mBGMusic.play();
     
 //    Global.checkGLVersion();
     // results:
@@ -44,7 +51,17 @@ public class DragonChessCore extends Game {
     // set first screen
     setScreen(Screens.LOGO);
   }
+  
+  @Override
+  public void dispose() {
+    mBGMusic.dispose();
+    LogoScreen.getInstance().dispose();
+    TitleScreen.getInstance().dispose();
+    OptionsScreen.getInstance().dispose();
+    GameScreen.getInstance().dispose();
+  }
 
+  // other functions //////////////////////////////////////////////////////////
   public void setScreen(Screens nextScreen) {
     switch (nextScreen) {
     case LOGO:
