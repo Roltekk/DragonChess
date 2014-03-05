@@ -1,5 +1,8 @@
 DragonChess
 ===========
+[![Build Status](http://roltekk.no-ip.com:10101/buildStatus/icon?job=All DragonChess build develop branch)](http://roltekk.no-ip.com:10101/job/All%20DragonChess%20build%20develop%20branch/)
+Description
+-----------
 Dragon Chess multi-platform port.
 
 History
