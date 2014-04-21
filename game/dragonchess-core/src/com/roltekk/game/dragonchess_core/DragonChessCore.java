@@ -19,7 +19,7 @@ import com.roltekk.game.dragonchess_core.screens.TitleScreen;
 
 public class DragonChessCore extends Game {
   private static final String TAG = "DragonChessCore";
-  private Music               mBGMusic;
+  private Music               mBGMusic;t
 
   // ApplicationListener overrides ////////////////////////////////////////////
   @Override
