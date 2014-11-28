@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="dragonchess-desktop" default="help" basedir=".">
+
+<!-- PROPERTIES ************************************************************ -->
+  <property name="verbose" value="no" />
+  <property name="ant.build.javac.source" value="1.6"/>
+  <property name="ant.build.javac.target" value="1.6"/>
+
+  <!-- directories ******************************************************* -->
+  <property name="root.dir" value=".." />
+
+  <!-- core project -->
+  <property name="core.dir" value="${root.dir}/dragonchess-core" />
+  <property name="core.src.dir" value="${core.dir}/src"/>
+  <property name="core.libs.dir" value="${core.dir}/libs"/>
+  <property name="core.libs.absolute.dir" location="${core.libs.dir}" />
+
+  <!-- desktop project -->
+  <property name="src.dir" value="src" />
+  <property name="src.absolute.dir" location="${src.dir}" />
+  <property name="libs.dir" value="libs" />
+  <property name="libs.absolute.dir" location="${libs.dir}" />
+
+  <!-- common assets -->
+  <property name="assets.dir" value="${root.dir}/dragonchess-android/assets"/>
+  <property name="assets.absolute.dir" location="${assets.dir}"/>
+
+  <!-- output -->
+  <property name="out.dir" value="bin" />
+  <property name="out.absolute.dir" location="${out.dir}" />
+  <property name="out.classes.absolute.dir" location="${out.dir}/classes" />
+  <property name="out.assets.dir" value="${out.dir}/assets" />
+  <property name="out.assets.absolute.dir" location="${out.assets.dir}" />
+
+<!-- TARGETS *************************************************************** -->
+  <target name="clean" description="Deletes all generated files and folders.">
+    <delete dir="${out.dir}" verbose="${verbose}" />
+  </target>
+
+<!-- reference from "LibDGX without Eclipse, for desktop" -->
+  <target name="init">
+    <mkdir dir="${out.dir}" />
+    <mkdir dir="${out.assets.dir}" />
+    <mkdir dir="${out.classes.absolute.dir}" />
+  </target>
+
+<!--   <target name="pack-textures" depends="init">
+    pack textures
+        <java 
+            classname="com.badlogic.gdx.tools.imagepacker.TexturePacker2" 
+            classpath="${libgdx.absolute.dir}/gdx.jar:${libgdx.absolute.dir}/extensions/gdx-tools.jar">
+            <arg value="${images.absolute.dir}" />
+            <arg value="${assets.absolute.dir}/textures" />
+            <arg value="images-packed" />
+        </java>
+    </target> -->
+
+  <target name="copy-assets">
+    <!-- copy assets from android project -->
+    <copy includeemptydirs="false" todir="${out.assets.dir}">
+      <fileset dir="${assets.dir}">
+        <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile" depends="init, copy-assets" description="Compiles code, output goes to the build dir.">
+    <path id="javac.classpath">
+      <fileset dir="${libs.absolute.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+      <fileset dir="${core.libs.absolute.dir}">
+        <include name="**/*.jar" />
+      </fileset>
+    </path>
+    <javac 
+        srcdir="${src.dir}" 
+        destdir="${out.classes.absolute.dir}"
+        classpathref="javac.classpath"
+        includeantruntime="false"
+        debug="on"
+        verbose="${verbose}">
+      <src path="${core.src.dir}" />
+      <src path="${out.assets.dir}" />
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile" description="Compiles code and builds jar. Output goes to the build dir.">
+    <jar 
+        destfile="${out.absolute.dir}/dragonchess-desktop.jar"
+        basedir="${out.classes.absolute.dir}">
+      <zipgroupfileset dir="${libs.absolute.dir}" includes="*.jar"/>
+      <zipgroupfileset dir="${core.libs.absolute.dir}" includes="*.jar"/>
+      <fileset dir="${out.assets.dir}" />
+      <manifest>
+        <attribute name="Main-Class" value="com.roltekk.game.dragonchess_desktop.DragonChessDesktop"/>
+      </manifest>
+    </jar>
+  </target>
+
+<!--
+    <target name="run" depends="compile">
+-->
+        <!--
+        <java jar="${out.absolute.dir}/agenthon.jar" fork="true"/>
+        -->
+<!--        <path id="java.classpath">
+            <fileset dir="${libs.absolute.dir}">
+                <include name="**/*.jar" />
+            </fileset>
+            <fileset dir="${main.libs.absolute.dir}">
+                <include name="**/*.jar" />
+            </fileset>
+            <pathelement location="${out.assets.absolute.dir}" />
+        </path>
+-->
+        <!-- <echo>${toString:java.classpath}</echo> -->
+<!--        <java 
+            fork="true"
+            classname="com.quixotix.agenthon.Main" 
+            classpath="${out.classes.absolute.dir}"
+            classpathref="java.classpath"/>
+    </target>
+-->
+  <target name="help" description="Displays detailed usage information.">
+    <echo>
+dragonchess-desktop
+
+The Targets are: 
+
+default         help
+
+clean           Remove all class files from [bin]
+compile         Compile all classes in [bin].
+<!-- run                     Run DragonChess -->
+dist            Make distribution in [bin] (jar)
+
+help            what you're looking at now.
+
+[src]           ${src.dir}
+[dist]          ${out.dir}
+[javadoc]       ${javadoc}
+    </echo>
+  </target>
+
+</project>
+

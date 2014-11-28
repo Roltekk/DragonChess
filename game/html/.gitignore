@@ -1,0 +1,11 @@
+# Eclipse IDE specific files
+.settings
+.classpath
+.project
+
+# HTML build files
+/gwt-unitCache
+/war/assets
+/war/dragonchess
+/war/WEB-INF/classes
+/war/WEB-INF/deploy
