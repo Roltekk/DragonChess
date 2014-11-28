@@ -1,4 +1,4 @@
-package com.roltekk.game.dragonchess_core.enums;
+package com.roltekk.dragonchess.enums;
 
 public enum Screens {
   LOGO, TITLE, OPTIONS, GAME;

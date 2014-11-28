@@ -4,20 +4,20 @@
  * Description: core application code
  */
 
-package com.roltekk.game.dragonchess_core;
+package com.roltekk.dragonchess;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
-import com.roltekk.game.dragonchess_core.debug.Debug;
-import com.roltekk.game.dragonchess_core.enums.Screens;
-import com.roltekk.game.dragonchess_core.screens.GameScreen;
-import com.roltekk.game.dragonchess_core.screens.LogoScreen;
-import com.roltekk.game.dragonchess_core.screens.OptionsScreen;
-import com.roltekk.game.dragonchess_core.screens.TitleScreen;
+import com.roltekk.dragonchess.debug.Debug;
+import com.roltekk.dragonchess.enums.Screens;
+import com.roltekk.dragonchess.screens.GameScreen;
+import com.roltekk.dragonchess.screens.LogoScreen;
+import com.roltekk.dragonchess.screens.OptionsScreen;
+import com.roltekk.dragonchess.screens.TitleScreen;
 
-public class DragonChessCore extends Game {
+public class DragonChess extends Game {
   private static final String TAG = "DragonChessCore";
   private Music               mBGMusic;
 
@@ -33,10 +33,18 @@ public class DragonChessCore extends Game {
     mBGMusic.play();
     
 //    Global.checkGLVersion();
-    // results for :
+    // libgdx 0.9.8 results for :
     // Android - GL11
     // Desktop - GL11
     // HTML    - GL20
+    
+    // libgdx 1.4.1 results for :
+    // Android 
+    //    Nexus One 2.3.7 ------ < GL30
+    //    Nexus 7 4.4.4 -------- < GL30
+    //    Nexus 5 5.0 ---------- < GL30
+    // Desktop (RT03/Win7) ----- + GL30
+    // HTML (RT03/Win7/Chrome) - < GL30
 
     // TODO : get screen metrics and save in global state
     

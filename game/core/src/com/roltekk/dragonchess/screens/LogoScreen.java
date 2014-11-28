@@ -4,26 +4,28 @@
  * Description: initial logo screen
  */
 
-package com.roltekk.game.dragonchess_core.screens;
+package com.roltekk.dragonchess.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
+//import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.roltekk.game.dragonchess_core.DragonChessCore;
-import com.roltekk.game.dragonchess_core.Global;
-import com.roltekk.game.dragonchess_core.actors.RTLogoActor;
-import com.roltekk.game.dragonchess_core.enums.Screens;
+import com.roltekk.dragonchess.DragonChess;
+//import com.roltekk.game.dragonchess_core.DragonChessCore;
+import com.roltekk.dragonchess.Global;
+import com.roltekk.dragonchess.actors.RTLogoActor;
+import com.roltekk.dragonchess.enums.Screens;
 
 public class LogoScreen implements Screen {
   private static final String TAG       = "LogoScreen";
   private static LogoScreen   mInstance = null;
-  private DragonChessCore     mDCC;
+  private DragonChess     mDCC;
   private Color               mBGColor  = Color.BLACK;
   private RTLogoActor         mRTLogoActor;
   private Stage               mStage;
@@ -38,7 +40,7 @@ public class LogoScreen implements Screen {
     return mInstance;
   }
   
-  public void init(DragonChessCore dcc) {
+  public void init(DragonChess dcc) {
     mInstance.mDCC = dcc;
     
     // create camera and viewport
@@ -66,7 +68,7 @@ public class LogoScreen implements Screen {
 
     mStage = new Stage();
     mStage.addActor(mRTLogoActor);
-    mStage.setCamera(mCamera);
+    mStage.getViewport().setCamera(mCamera);
   }
 
   // Screen overrides /////////////////////////////////////////////////////////
@@ -74,7 +76,7 @@ public class LogoScreen implements Screen {
   public void render(float delta) {
     // clear screen
     Gdx.gl.glClearColor(mBGColor.r, mBGColor.b, mBGColor.g, mBGColor.a);
-    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
     // draw RolTekk logo
     mStage.act(Gdx.graphics.getDeltaTime());

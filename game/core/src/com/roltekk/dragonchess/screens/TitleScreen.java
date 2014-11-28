@@ -1,35 +1,35 @@
 /*
  * Copyright (C) 2014 RolTekk
  * Application: DragonChess
- * Description: game options screen
+ * Description: title and main menu screen
  */
 
-package com.roltekk.game.dragonchess_core.screens;
+package com.roltekk.dragonchess.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
-import com.roltekk.game.dragonchess_core.DragonChessCore;
-import com.roltekk.game.dragonchess_core.enums.Screens;
+import com.badlogic.gdx.graphics.GL20;
+import com.roltekk.dragonchess.DragonChess;
+import com.roltekk.dragonchess.enums.Screens;
 
-public class OptionsScreen implements Screen, InputProcessor {
-  private static final String TAG = "OptionsScreen";
-  private static OptionsScreen mInstance = null;
-  private DragonChessCore mDCC;
-  private Color mBGColor = Color.GREEN;
+public class TitleScreen implements Screen, InputProcessor {
+  private static final String TAG = "TitleScreen";
+  private static TitleScreen mInstance = null;
+  private DragonChess mDCC;
+  private Color mBGColor = Color.RED;
   
   // unctor
-  protected OptionsScreen() {}
+  protected TitleScreen() {}
 
   // singleton accessor
-  public static OptionsScreen getInstance() {
-    if (null == mInstance) { mInstance = new OptionsScreen(); }
+  public static TitleScreen getInstance() {
+    if (null == mInstance) { mInstance = new TitleScreen(); }
     return mInstance;
   }
   
-  public void init(DragonChessCore dcc) {
+  public void init(DragonChess dcc) {
     mInstance.mDCC = dcc;
   }
 
@@ -38,13 +38,13 @@ public class OptionsScreen implements Screen, InputProcessor {
   public void render(float delta) {
     // clear screen
     Gdx.gl.glClearColor(mBGColor.r, mBGColor.b, mBGColor.g, mBGColor.a);
-    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-    // TODO : draw options screen here
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    // TODO : draw title screen here
     //...
     // test
     if (Gdx.input.justTouched()) {
-      // msg core to go to the game screen
-      mDCC.setScreen(Screens.GAME);
+      // msg core to go to the options screen
+      mDCC.setScreen(Screens.OPTIONS);
     }
   }
 

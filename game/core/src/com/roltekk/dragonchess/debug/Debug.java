@@ -4,7 +4,7 @@
  * Description: debug functionality
  */
 
-package com.roltekk.game.dragonchess_core.debug;
+package com.roltekk.dragonchess.debug;
 
 import com.badlogic.gdx.Application;
 

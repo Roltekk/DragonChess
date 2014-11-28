@@ -1,35 +1,35 @@
 /*
  * Copyright (C) 2014 RolTekk
  * Application: DragonChess
- * Description: main game screen
+ * Description: game options screen
  */
 
-package com.roltekk.game.dragonchess_core.screens;
+package com.roltekk.dragonchess.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL10;
-import com.roltekk.game.dragonchess_core.DragonChessCore;
-import com.roltekk.game.dragonchess_core.enums.Screens;
+import com.badlogic.gdx.graphics.GL20;
+import com.roltekk.dragonchess.DragonChess;
+import com.roltekk.dragonchess.enums.Screens;
 
-public class GameScreen implements Screen, InputProcessor {
-  private static final String TAG = "GameScreen";
-  private static GameScreen mInstance = null;
-  private DragonChessCore mDCC;
-  private Color mBGColor = Color.BLUE;
+public class OptionsScreen implements Screen, InputProcessor {
+  private static final String TAG = "OptionsScreen";
+  private static OptionsScreen mInstance = null;
+  private DragonChess mDCC;
+  private Color mBGColor = Color.GREEN;
   
   // unctor
-  protected GameScreen() {}
+  protected OptionsScreen() {}
 
   // singleton accessor
-  public static GameScreen getInstance() {
-    if (null == mInstance) { mInstance = new GameScreen(); }
+  public static OptionsScreen getInstance() {
+    if (null == mInstance) { mInstance = new OptionsScreen(); }
     return mInstance;
   }
   
-  public void init(DragonChessCore dcc) {
+  public void init(DragonChess dcc) {
     mInstance.mDCC = dcc;
   }
 
@@ -38,13 +38,13 @@ public class GameScreen implements Screen, InputProcessor {
   public void render(float delta) {
     // clear screen
     Gdx.gl.glClearColor(mBGColor.r, mBGColor.b, mBGColor.g, mBGColor.a);
-    Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-    // TODO : draw game screen here
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    // TODO : draw options screen here
     //...
     // test
     if (Gdx.input.justTouched()) {
-      // msg core to go to the logo screen
-      mDCC.setScreen(Screens.LOGO);
+      // msg core to go to the game screen
+      mDCC.setScreen(Screens.GAME);
     }
   }
 

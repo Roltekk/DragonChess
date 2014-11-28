@@ -4,7 +4,7 @@
  * Description: Credits for various contributors and resources
  */
 
-package com.roltekk.game.dragonchess_core;
+package com.roltekk.dragonchess;
 
 public class Credits {
   // programming
