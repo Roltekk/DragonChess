@@ -1,10 +1,6 @@
 DragonChess
 ===========
-<<<<<<< HEAD
-[![GRADLE develop all Build Status](http://roltekk.no-ip.com:10101/buildStatus/icon?job=All DragonChess build develop branch)](http://roltekk.no-ip.com:10101/job/All%20DragonChess%20build%20develop%20branch/)
-=======
-[![Build Status](http://roltekk.no-ip.com:10101/buildStatus/icon?job=All DragonChess build develop branch GRADLE)](http://roltekk.no-ip.com:10101/job/All%20DragonChess%20build%20develop%20branch%20GRADLE/)
->>>>>>> 523854ca9a2e1bc753cac52e7086d8b2b8fd9685
+[![GRADLE develop all Build Status](http://roltekk.no-ip.com:10101/buildStatus/icon?job=All DragonChess build develop branch GRADLE)](http://roltekk.no-ip.com:10101/job/All%20DragonChess%20build%20develop%20branch%20GRADLE/)
 Description
 -----------
 Dragon Chess multi-platform port.
